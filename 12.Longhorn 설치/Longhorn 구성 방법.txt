@@ -98,8 +98,6 @@ parameters:
 2. kubectl get svc longhorn-frontend -n longhorn-system (IP 할당 확인)
 3. 브라우저 -> 221.139.104.187 접속 -> Longhorn 접속 완료
 
-Data Sources에서 Prometheus -> Add new data source
-
 ---
 
 # Toubleshooting
