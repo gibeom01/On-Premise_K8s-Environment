@@ -15,7 +15,32 @@
 3. helm install longhorn longhorn/longhorn --namespace longhorn-system --create-namespace
 4. kubectl get pods -n longhorn-system -w
 
-# Longhorn UI Volume Tes
+# MetalLB IPAddressPool 등록
+1. cat > metallb-config.yaml
+
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: default-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  # 현재 서버와 같은 대역이면서, 다른 기기가 안 쓰고 있는 남는 IP 범위
+  - 221.139.104.187-221.139.104.187
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: default-l2
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+  - default-pool
+
+2. kubectl apply -f metallb-config.yaml
+3. kubectl rollout restart deployment controller -n metallb-system (MetalLB 캐시 비우기)
+
+# Longhorn UI Volume Test
 1. cat > longhorn-test.yaml
 
 apiVersion: v1
@@ -59,7 +84,19 @@ parameters:
 
 2. kubectl apply -f longhorn-test.yaml
 
-#
+# Longhorn -> Loadblanceer 전환 및 공유 IP 설정
+1. kubectl patch svc longhorn-frontend -n longhorn-system -p '{
+  "metadata": {
+    "annotations": {
+      "metallb.universe.tf/allow-shared-ip": "noblesys-shared-ip"
+    }
+  },
+  "spec": {
+    "type": "LoadBalancer"
+  }
+}'
+2. kubectl get svc longhorn-frontend -n longhorn-system (IP 할당 확인)
+
 Data Sources에서 Prometheus -> Add new data source
 
 ---
