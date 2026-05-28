@@ -1,4 +1,4 @@
-## 실제 IDC의 물리적 서버에 Kubernetes 환경 구축 방법
+## 실제 IDC 물리적 서버 Kubernetes 환경 구축
 
 ### * 참조 *
 #### k8s-at-home.com (온프레미스 K8s 가이드) vmware.com rke2.io (RKE2 공식 문서) cert-manager.io
