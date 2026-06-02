@@ -1,7 +1,7 @@
 ## 실제 IDC 물리적 서버 Kubernetes 환경 구축
 
 ### * 구축 도구 *
-#### 클러스터 기반 및 고가용성 (Foundation & HA) 도구: HAProxy, Keepalived, Kubespray, HAProxy Ingress 도메인, MetalLB, SSL_Cert-manager 활용한 HTTPS
+#### 클러스터 기반 및 고가용성 (Foundation & HA) 도구: HAProxy(Istio, Canary), Keepalived, Kubespray, HAProxy Ingress 도메인, MetalLB, SSL_Cert-manager 활용한 HTTPS
 #### 클러스터 가시성 및 모니터링 (Observability) 도구: kube-prometheus-stack, Loki + Promtail 구성 (PLG Stack), ipmi-exporter (물리 서버 모니터링), Grafana Tempo
 #### 백업 및 재해 복구 (Backup & Disaster Recovery) 도구: ETCD Backup, MinIO, Velero
 #### 분산 스토리지 및 프라이빗 레지스트리 도구: Longhorn -> Prometheus 연결, Harbor
